@@ -1,5 +1,9 @@
 <script setup></script>
 
-<template></template>
+<template>
+    <div>
+        <h1>Course</h1>
+    </div>
+</template>
 
 <style scoped></style>

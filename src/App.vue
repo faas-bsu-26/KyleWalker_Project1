@@ -5,9 +5,9 @@
 </script>
 
 <template>
-    <div>
-        <div class="sidebar">
-            <nav>
+    <div class="container">
+        <nav>
+            <div class="sidebar">
                 <div class="user">
                     <img
                         src="/circle-user-solid-full.svg"
@@ -60,15 +60,20 @@
                         <p>Group</p>
                     </div></RouterLink
                 >
-            </nav>
-        </div>
-        <main>
+            </div>
+        </nav>
+
+        <main class="pages">
             <RouterView />
         </main>
     </div>
 </template>
 
 <style scoped>
+    .container {
+        display: flex;
+    }
+
     .sidebar {
         width: 200px;
         height: 100vh;
@@ -112,5 +117,9 @@
 
     .link-content p {
         font-size: 20px;
+    }
+
+    .pages {
+        padding: 2rem;
     }
 </style>
