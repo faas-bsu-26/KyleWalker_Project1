@@ -5,4 +5,11 @@ import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import { router } from './router';
 
-createApp(App).mount('#app');
+const app = createApp(App);
+app.use(router);
+app.use(PrimeVue, {
+    theme: {
+        preset: Aura,
+    },
+});
+app.mount('#app');
