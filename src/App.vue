@@ -77,6 +77,7 @@
     .sidebar {
         width: 200px;
         height: 100vh;
+        position: fixed;
         padding: 2rem;
         background-color: aliceblue;
         justify-items: center;
@@ -120,6 +121,7 @@
     }
 
     .pages {
+        margin-left: 200px;
         padding: 2rem;
     }
 </style>

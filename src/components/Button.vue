@@ -7,9 +7,11 @@
 </script>
 
 <template>
-    <div class="container">
+    <div class="button-container">
         <button class="button">
-            <img :src="icon" :alt="alt" class="button-icon" />{{ msg }}
+            <img v-if="icon" :src="icon" :alt="alt" class="button-icon" />{{
+                msg
+            }}
         </button>
     </div>
 </template>
