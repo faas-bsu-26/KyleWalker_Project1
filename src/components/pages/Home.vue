@@ -62,8 +62,8 @@
     <div>
         <h1>Home</h1>
         <div class="home-container">
-            <div class="course-container">
-                <div class="courses-buttons">
+            <div class="course-section">
+                <div class="courses-filter">
                     <Dropdown title="Filter" :options="filterOptions" />
                     <Dropdown title="Semester" :options="semesterOptions" />
                     <Button msg="Add" icon="/plus-solid-full (1).svg" />
@@ -103,16 +103,16 @@
         gap: 5rem;
     }
 
-    .course-container {
+    .course-section {
         flex: 3;
         display: grid;
         gap: 3rem;
     }
 
-    .courses-buttons {
+    .courses-filter {
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     .courses {
