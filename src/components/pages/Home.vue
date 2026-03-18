@@ -1,8 +1,13 @@
 <script setup>
+    import { ref, computed } from 'vue';
     import Button from '../Button.vue';
     import Dropdown from '../Dropdown.vue';
     import CourseCard from '../CourseCard.vue';
     import GroupCard from '../GroupCard.vue';
+    import CouresForm from '../CouresForm.vue';
+    import { userData } from '../../data/userData';
+
+    const showCourseForm = ref(false);
 
     const filterOptions = [
         'Recently Added',
@@ -12,50 +17,16 @@
 
     const semesterOptions = ['Spring 2026', 'Fall 2025', 'Spring 2025'];
 
-    const courses = [
-        {
-            title: 'HCI',
-            classCode: 'CS 445',
-            recentLessons: ['Info Gathering', 'Digital Design Tools'],
-            knowledge: 50,
-        },
-        {
-            title: 'Data mining',
-            classCode: 'CS 455',
-            recentLessons: ['Clustering', 'Similarity'],
-            knowledge: 37,
-        },
-        {
-            title: 'Database Design',
-            classCode: 'CS 418',
-            recentLessons: ['Advanced SQL', 'ER Diagrams'],
-            knowledge: 75,
-        },
-        {
-            title: 'Backend Web Dev',
-            classCode: 'CS 312',
-            recentLessons: ['Docker', 'Typescript'],
-            knowledge: 100,
-        },
-    ];
+    const courses = computed(() =>
+        userData.courses.map((course) => ({
+            ...course,
+            recentLessons: course.lessons.slice(0, 2).map((l) => l.title),
+        })),
+    );
 
-    const groups = [
-        {
-            title: 'Exam 1',
-            classCode: 'CS 455',
-            dueDate: 'February 25 at 10:00 AM',
-        },
-        {
-            title: 'Project 1',
-            classCode: 'CS 445',
-            dueDate: 'March 20 at 11:59 PM',
-        },
-        {
-            title: 'Project 3',
-            classCode: 'CS 312',
-            dueDate: 'April 18 at 11:59 PM',
-        },
-    ];
+    const groups = computed(() =>
+        userData.courses.flatMap((course) => course.groups || []),
+    );
 </script>
 
 <template>
@@ -66,17 +37,34 @@
                 <div class="courses-filter">
                     <Dropdown title="Filter" :options="filterOptions" />
                     <Dropdown title="Semester" :options="semesterOptions" />
-                    <Button msg="Add" icon="/plus-solid-full (1).svg" />
+                    <Button
+                        msg="Add"
+                        icon="/plus-solid-full (1).svg"
+                        :style="{
+                            width: 'auto',
+                            minWidth: '100px',
+                            maxWidth: '150px',
+                        }"
+                        @click="showCourseForm = true"
+                    />
                 </div>
                 <div class="courses">
-                    <CourseCard
-                        v-for="course in courses"
-                        :key="course.title"
-                        :title="course.title"
-                        :class-code="course.classCode"
-                        :recent-lessons="course.recentLessons"
-                        :knowledge="course.knowledge"
-                    />
+                    <div v-for="course in courses" :key="course.id">
+                        <router-link
+                            :to="{
+                                path: '/Course',
+                                query: { courseId: course.id },
+                            }"
+                            class="course-link"
+                        >
+                            <CourseCard
+                                :title="course.title"
+                                :class-code="course.classCode"
+                                :recent-lessons="course.recentLessons"
+                                :knowledge="course.knowledge"
+                            />
+                        </router-link>
+                    </div>
                 </div>
             </div>
             <div class="upcoming-groups">
@@ -93,6 +81,10 @@
                     />
                 </div>
             </div>
+            <CouresForm
+                :isOpen="showCourseForm"
+                @close="showCourseForm = false"
+            />
         </div>
     </div>
 </template>
@@ -112,7 +104,9 @@
     .courses-filter {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
+        gap: 1rem;
+        align-items: center;
     }
 
     .courses {
@@ -121,6 +115,11 @@
         justify-content: space-evenly;
         flex-wrap: wrap;
         row-gap: 2rem;
+    }
+
+    .course-link {
+        text-decoration: none;
+        color: inherit;
     }
 
     .upcoming-groups {

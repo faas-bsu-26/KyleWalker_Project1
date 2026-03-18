@@ -1,18 +1,24 @@
 <script setup>
+    import { computed } from 'vue';
     import Button from './Button.vue';
 
-    defineProps({
+    const props = defineProps({
         title: String,
         classCode: String,
         recentLessons: [String],
         knowledge: Number,
     });
+
+    const progress = computed(() => props.knowledge / 100);
 </script>
 
 <template>
     <div class="container">
         <div class="container-content">
-            <div class="knowledge-container">
+            <div
+                class="knowledge-container"
+                :style="{ '--progress': progress }"
+            >
                 <p>{{ knowledge }}%</p>
             </div>
             <div class="course-info">
@@ -32,14 +38,23 @@
 
 <style scoped>
     .container {
-        width: 300px;
-        padding: 1.5rem 1rem;
-        background-color: #e5e5e5;
-        align-content: center;
-        border-radius: 10px;
+        width: 320px;
+        padding: 2rem 1.5rem;
+        background-color: var(--card-background);
+        border-radius: 16px;
         display: flex;
         justify-content: center;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+        box-shadow: var(--shadow);
+        transition:
+            box-shadow 0.3s ease,
+            transform 0.3s ease;
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+    }
+
+    .container:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
     }
 
     .container-content {
@@ -47,20 +62,40 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 1.5rem;
     }
 
     .knowledge-container {
-        width: 125px;
-        height: 125px;
-        background-color: white;
-        font-size: 36px;
-        font-weight: bold;
-        border: 6px solid #d4d4d4;
+        position: relative;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
-        display: grid;
-        align-content: center;
+        background: conic-gradient(
+            var(--primary-color) calc(var(--progress) * 360deg),
+            #e5e7eb 0deg
+        );
+        display: flex;
+        align-items: center;
         justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .knowledge-container::before {
+        content: '';
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        background-color: var(--card-background);
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .knowledge-container p {
+        position: relative;
+        z-index: 2;
+        margin: 0;
     }
 
     .course-info {
@@ -68,20 +103,24 @@
     }
 
     .course-info h1 {
-        margin: 0;
-        font-size: 28px;
+        margin: 0 0 0.5rem 0;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--text-primary);
     }
 
     .course-info h2 {
         margin: 0;
-        font-size: 18px;
-        font-weight: bold;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-secondary);
     }
 
     .recent-lessons {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 0.5rem;
+        width: 100%;
     }
 </style>

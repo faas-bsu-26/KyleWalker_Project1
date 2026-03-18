@@ -18,32 +18,40 @@
 
 <style scoped>
     #dropdown {
-        min-width: 75px;
-        padding: 0.5rem;
-        padding-right: 2rem;
-        background-color: royalblue;
-        color: white;
-        font-weight: bold;
-        font-size: medium;
-        border: none;
-        border-radius: 10px;
+        min-width: 120px;
+        padding: 0.75rem 1rem;
+        background-color: var(--card-background);
+        color: var(--text-primary);
+        font-weight: 500;
+        font-size: 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        column-gap: 0.5rem;
         appearance: none;
         background-image: url('/angle-down-solid-full.svg');
         background-repeat: no-repeat;
-        background-position: right 0.5rem center;
-        background-size: 14px;
+        background-position: right 0.75rem center;
+        background-size: 12px;
+        transition:
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
+        box-shadow: var(--shadow);
     }
 
     #dropdown:hover {
-        background-color: rgb(51, 92, 217);
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-hover);
+    }
+
+    #dropdown:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
 
     #dropdown option {
-        background-color: white;
-        color: black;
+        background-color: var(--card-background);
+        color: var(--text-primary);
+        padding: 0.5rem;
     }
 </style>

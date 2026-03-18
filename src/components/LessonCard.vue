@@ -1,30 +1,57 @@
 <script setup>
-    defineProps({
+    import { computed } from 'vue';
+
+    const props = defineProps({
         title: String,
         description: String,
-        knowledge: 'Strong' | 'Working on it' | 'Weak',
+        knowledge: String,
+    });
+
+    const knowledgeColor = computed(() => {
+        switch (props.knowledge) {
+            case 'Strong':
+                return 'var(--accent-color)';
+            case 'Working on it':
+                return 'var(--primary-color)';
+            case 'Weak':
+                return '#ef4444';
+            default:
+                return 'var(--secondary-color)';
+        }
     });
 </script>
 
 <template>
-    <div class="container">
+    <div class="container" :style="{ '--lesson-border': knowledgeColor }">
         <div class="lesson-content">
             <h1>{{ title }}</h1>
             <p>{{ description }}</p>
+            <span class="knowledge" :style="{ color: knowledgeColor }">{{
+                knowledge
+            }}</span>
         </div>
     </div>
 </template>
 
 <style scoped>
     .container {
-        width: 300px;
-        padding: 1.5rem 1rem;
-        background-color: #e5e5e5;
-        align-content: center;
-        border-radius: 10px;
+        width: 320px;
+        padding: 2rem 1.5rem;
+        background-color: var(--card-background);
+        border-radius: 16px;
         display: flex;
         justify-content: center;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+        box-shadow: var(--shadow);
+        transition:
+            box-shadow 0.3s ease,
+            transform 0.3s ease;
+        border: 2px solid var(--lesson-border);
+        cursor: pointer;
+    }
+
+    .container:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
     }
 
     .lesson-content {
@@ -32,17 +59,28 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 1rem;
+        text-align: center;
     }
 
-    .group-content h1 {
+    .lesson-content h1 {
         margin: 0;
-        font-size: 28px;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--text-primary);
     }
 
-    .group-content p {
+    .lesson-content p {
         margin: 0;
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+
+    .knowledge {
         font-size: 12px;
-        font-weight: bold;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 </style>

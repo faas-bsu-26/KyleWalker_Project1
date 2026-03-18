@@ -18,14 +18,23 @@
 
 <style scoped>
     .container {
-        width: 300px;
+        width: 100%;
         padding: 1.5rem 1rem;
-        background-color: #e5e5e5;
-        align-content: center;
-        border-radius: 10px;
+        background-color: var(--card-background);
+        border-radius: 12px;
         display: flex;
         justify-content: center;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+        box-shadow: var(--shadow);
+        transition:
+            box-shadow 0.3s ease,
+            transform 0.3s ease;
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+    }
+
+    .container:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
     }
 
     .group-content {
@@ -33,23 +42,28 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 0.5rem;
+        text-align: center;
     }
 
     .group-content h1 {
         margin: 0;
-        font-size: 28px;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-primary);
     }
 
     .group-content h2 {
         margin: 0;
-        font-size: 18px;
-        font-weight: bold;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
     }
 
     .group-content p {
         margin: 0;
         font-size: 12px;
-        font-weight: bold;
+        font-weight: 400;
+        color: var(--text-secondary);
     }
 </style>

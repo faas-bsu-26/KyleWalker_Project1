@@ -1,49 +1,70 @@
 <script setup>
+import { ref } from 'vue';
+
 defineProps({
     isOpen: Boolean,
 });
 
 const emit = defineEmits(['close']);
+
+const lessons = ref(['', '', '']);
+
+const addLesson = () => {
+    lessons.value.push('');
+};
+
+const removeLesson = (index) => {
+    lessons.value.splice(index, 1);
+};
 </script>
 
 <template>
     <div v-if="isOpen" class="modal-overlay" @click="emit('close')">
         <div class="modal-content" @click.stop>
-            <h2>Create Lesson</h2>
+            <h2>Create Group</h2>
             <form>
                 <div class="form-group">
-                    <label>Lesson Name:</label>
+                    <label>Group Name:</label>
                     <input
                         type="text"
-                        placeholder="ex. Intro To Computer Science"
+                        placeholder="ex. Exam 1"
                     />
                 </div>
 
                 <div class="form-group">
-                    <label>Description:</label>
-                    <textarea
-                        placeholder="ex. This lesson mainly consists of the points..."
-                        rows="6"
-                    />
-                </div>
-
-                <div class="form-group">
-                    <label>Notes:</label>
-                    <div class="upload-area">
-                        <svg
-                            width="40"
-                            height="40"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="17 8 12 3 7 8" />
-                            <line x1="12" y1="3" x2="12" y2="15" />
-                        </svg>
-                        <p>Upload</p>
+                    <label>Lessons:</label>
+                    <div class="lessons-list">
+                        <div v-for="(lesson, index) in lessons" :key="index" class="lesson-input-row">
+                            <input
+                                type="text"
+                                placeholder="ex. Intro To Computer Science"
+                            />
+                            <button
+                                v-if="index < lessons.length - 1"
+                                type="button"
+                                class="btn-remove"
+                                @click="removeLesson(index)"
+                            >
+                                −
+                            </button>
+                            <button
+                                v-else
+                                type="button"
+                                class="btn-add"
+                                @click="addLesson"
+                            >
+                                +
+                            </button>
+                        </div>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label>End Date and Time:</label>
+                    <input
+                        type="text"
+                        placeholder="ex. February 24 at 10:00 AM"
+                    />
                 </div>
 
                 <div class="form-actions">
@@ -108,8 +129,7 @@ label {
     font-size: 0.95rem;
 }
 
-input[type='text'],
-textarea {
+input[type='text'] {
     padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -119,45 +139,51 @@ textarea {
     background-color: var(--background-color);
 }
 
-input[type='text']:focus,
-textarea:focus {
+input[type='text']:focus {
     outline: none;
     border-color: var(--primary-color);
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder {
     color: var(--text-secondary);
 }
 
-textarea {
-    resize: vertical;
-}
-
-.upload-area {
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    padding: 2rem;
+.lessons-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 0.5rem;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
 }
 
-.upload-area:hover {
-    border-color: var(--primary-color);
+.lesson-input-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
-.upload-area svg {
-    color: var(--text-secondary);
+.lesson-input-row input {
+    flex: 1;
 }
 
-.upload-area p {
-    margin: 0;
-    font-weight: 600;
+.btn-add,
+.btn-remove {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
     color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.btn-add:hover,
+.btn-remove:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .form-actions {

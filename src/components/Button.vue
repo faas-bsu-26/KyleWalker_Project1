@@ -17,27 +17,42 @@
 </template>
 
 <style scoped>
+    .button-container {
+        width: 100%;
+    }
+
     .button {
-        min-width: 75px;
-        padding: 0.5rem;
-        background-color: royalblue;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background-color: var(--primary-color);
         color: white;
-        font-weight: bold;
-        font-size: medium;
+        font-weight: 500;
+        font-size: 14px;
         border: none;
-        border-radius: 10px;
+        border-radius: 8px;
         cursor: pointer;
         display: flex;
         align-items: center;
-        column-gap: 0.5rem;
+        justify-content: center;
+        gap: 0.5rem;
+        transition:
+            background-color 0.3s ease,
+            box-shadow 0.3s ease;
+        box-shadow: var(--shadow);
     }
 
     .button:hover {
-        background-color: rgb(51, 92, 217);
+        background-color: var(--primary-hover);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .button:hover {
+        background-color: var(--primary-hover);
+        box-shadow: var(--shadow-hover);
     }
 
     .button-icon {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
     }
 </style>

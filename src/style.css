@@ -1,29 +1,46 @@
 :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
-    color: #000000de;
-    background-color: #eeeeee;
+    color-scheme: light;
+    color: #1f2937;
+    background-color: #f9fafb;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    /* Color Palette */
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary-color: #64748b;
+    --accent-color: #10b981;
+    --background-color: #ffffff;
+    --card-background: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover:
+        0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 a {
-    font-weight: bold;
-    color: black;
+    font-weight: 500;
+    color: var(--primary-color);
     text-decoration: none;
 }
 a:hover {
-    color: black;
+    color: var(--primary-hover);
 }
 
 body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
+    background-color: var(--background-color);
+    color: var(--text-primary);
 }
