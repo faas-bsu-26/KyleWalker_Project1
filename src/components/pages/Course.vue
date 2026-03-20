@@ -39,8 +39,7 @@
                 <div class="lessons-filter">
                     <Dropdown title="Filter" :options="filterOptions" />
                     <Button
-                        msg="Edit Lessons"
-                        icon="/plus-solid-full (1).svg"
+                        msg="+  Edit Lessons"
                         :style="{
                             width: 'auto',
                         }"
@@ -91,8 +90,7 @@
                         />
                     </RouterLink>
                     <Button
-                        msg="Edit Groups"
-                        icon="/plus-solid-full (1).svg"
+                        msg="+  Edit Groups"
                         :style="{
                             width: 'auto',
                             minWidth: '100px',

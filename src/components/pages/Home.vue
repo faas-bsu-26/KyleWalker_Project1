@@ -6,7 +6,6 @@
     import GroupCard from '../GroupCard.vue';
     import CouresForm from '../CouresForm.vue';
     import { userData } from '../../data/userData';
-
     const showCourseForm = ref(false);
 
     const filterOptions = [
@@ -43,8 +42,7 @@
                     <Dropdown title="Filter" :options="filterOptions" />
                     <Dropdown title="Semester" :options="semesterOptions" />
                     <Button
-                        msg="Edit Courses"
-                        icon="/plus-solid-full (1).svg"
+                        msg="+  Edit Courses"
                         :style="{
                             width: 'auto',
                             minWidth: '100px',

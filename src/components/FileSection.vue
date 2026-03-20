@@ -25,7 +25,7 @@
                 {{ file }}
             </a>
         </div>
-        <Button msg="Edit" icon="/plus-solid-full (1).svg" class="add-button" />
+        <Button msg="+  Edit" class="add-button" />
     </div>
 </template>
 
