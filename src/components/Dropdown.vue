@@ -28,25 +28,12 @@
         border-radius: 8px;
         cursor: pointer;
         appearance: none;
-        background-image: url('/angle-down-solid-full.svg');
-        background-repeat: no-repeat;
-        background-position: right 0.75rem center;
-        background-size: 12px;
-        transition:
-            border-color 0.3s ease,
-            box-shadow 0.3s ease;
         box-shadow: var(--shadow);
     }
 
     #dropdown:hover {
         border-color: var(--primary-color);
         box-shadow: var(--shadow-hover);
-    }
-
-    #dropdown:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
 
     #dropdown option {

@@ -12,7 +12,7 @@
             case 'Strong':
                 return 'var(--accent-color)';
             case 'Working on it':
-                return 'var(--primary-color)';
+                return '#FFA500';
             case 'Weak':
                 return '#ef4444';
             default:

@@ -22,7 +22,8 @@
     const currentCourse = computed(() => {
         const courseId = route.query.courseId;
         return (
-            userData.courses.find((c) => c.id === courseId) || userData.courses[0]
+            userData.courses.find((c) => c.id === courseId) ||
+            userData.courses[0]
         );
     });
 
@@ -38,24 +39,32 @@
                 <div class="lessons-filter">
                     <Dropdown title="Filter" :options="filterOptions" />
                     <Button
-                        msg="Add"
+                        msg="Edit Lessons"
                         icon="/plus-solid-full (1).svg"
                         :style="{
                             width: 'auto',
-                            minWidth: '100px',
-                            maxWidth: '150px',
                         }"
                         @click="showLessonForm = true"
                     />
                 </div>
                 <div class="lessons">
-                    <LessonCard
+                    <RouterLink
                         v-for="lesson in lessons"
                         :key="lesson.id"
-                        :title="lesson.title"
-                        :description="lesson.description"
-                        :knowledge="lesson.knowledge"
-                    />
+                        :to="{
+                            path: '/Lesson',
+                            query: {
+                                courseId: currentCourse.id,
+                                lessonId: lesson.id,
+                            },
+                        }"
+                    >
+                        <LessonCard
+                            :title="lesson.title"
+                            :description="lesson.description"
+                            :knowledge="lesson.knowledge"
+                        />
+                    </RouterLink>
                 </div>
             </div>
             <div class="course-groups">
@@ -63,15 +72,26 @@
                     <h1>Groups</h1>
                 </div>
                 <div class="groups">
-                    <GroupCard
+                    <RouterLink
                         v-for="group in groups"
                         :key="group.id"
-                        :title="group.title"
-                        :class-code="group.classCode"
-                        :due-date="group.dueDate"
-                    />
+                        :to="{
+                            path: '/Group',
+                            query: {
+                                courseId: currentCourse.id,
+                                groupId: group.id,
+                            },
+                        }"
+                        class="card-link"
+                    >
+                        <GroupCard
+                            :title="group.title"
+                            :class-code="group.classCode"
+                            :due-date="group.dueDate"
+                        />
+                    </RouterLink>
                     <Button
-                        msg="Add"
+                        msg="Edit Groups"
                         icon="/plus-solid-full (1).svg"
                         :style="{
                             width: 'auto',
@@ -117,6 +137,7 @@
     }
 
     .course-groups {
+        width: 100%;
         display: grid;
         gap: 1.5rem;
     }
@@ -128,7 +149,6 @@
 
     .groups {
         display: grid;
-        justify-items: center;
         gap: 1rem;
     }
 </style>

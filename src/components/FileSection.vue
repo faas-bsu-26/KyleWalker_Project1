@@ -1,15 +1,15 @@
 <script setup>
-import Button from './Button.vue';
+    import Button from './Button.vue';
 
-defineProps({
-    title: String,
-    files: {
-        type: Array,
-        default: () => [],
-    },
-});
+    defineProps({
+        title: String,
+        files: {
+            type: Array,
+            default: () => [],
+        },
+    });
 
-const emit = defineEmits(['add']);
+    const emit = defineEmits(['add']);
 </script>
 
 <template>
@@ -25,51 +25,46 @@ const emit = defineEmits(['add']);
                 {{ file }}
             </a>
         </div>
-        <Button
-            msg="Add"
-            icon="/plus-solid-full (1).svg"
-            class="add-button"
-        />
+        <Button msg="Edit" icon="/plus-solid-full (1).svg" class="add-button" />
     </div>
 </template>
 
 <style scoped>
-.file-section {
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    box-shadow: var(--shadow);
-}
+    .file-section {
+        background-color: var(--card-background);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        box-shadow: var(--shadow);
+    }
 
-h3 {
-    margin: 0;
-    color: var(--text-primary);
-    font-size: 1rem;
-    font-weight: 600;
-}
+    h3 {
+        margin: 0;
+        color: var(--text-primary);
+        font-size: 1rem;
+        font-weight: 600;
+    }
 
-.files-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
+    .files-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-.file-link {
-    color: var(--primary-color);
-    text-decoration: underline;
-    font-size: 0.9rem;
-    transition: color 0.2s ease;
-}
+    .file-link {
+        color: var(--primary-color);
+        text-decoration: underline;
+        font-size: 0.9rem;
+    }
 
-.file-link:hover {
-    color: var(--primary-hover);
-}
+    .file-link:hover {
+        color: var(--primary-hover);
+    }
 
-.add-button {
-    margin-top: auto;
-}
+    .add-button {
+        margin-top: auto;
+    }
 </style>

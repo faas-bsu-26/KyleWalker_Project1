@@ -25,7 +25,12 @@
     );
 
     const groups = computed(() =>
-        userData.courses.flatMap((course) => course.groups || []),
+        userData.courses.flatMap((course) =>
+            (course.groups || []).map((group) => ({
+                ...group,
+                courseId: course.id,
+            })),
+        ),
     );
 </script>
 
@@ -38,7 +43,7 @@
                     <Dropdown title="Filter" :options="filterOptions" />
                     <Dropdown title="Semester" :options="semesterOptions" />
                     <Button
-                        msg="Add"
+                        msg="Edit Courses"
                         icon="/plus-solid-full (1).svg"
                         :style="{
                             width: 'auto',
@@ -50,7 +55,7 @@
                 </div>
                 <div class="courses">
                     <div v-for="course in courses" :key="course.id">
-                        <router-link
+                        <RouterLink
                             :to="{
                                 path: '/Course',
                                 query: { courseId: course.id },
@@ -63,7 +68,7 @@
                                 :recent-lessons="course.recentLessons"
                                 :knowledge="course.knowledge"
                             />
-                        </router-link>
+                        </RouterLink>
                     </div>
                 </div>
             </div>
@@ -72,13 +77,24 @@
                     <h1>Upcoming Groups</h1>
                 </div>
                 <div class="groups">
-                    <GroupCard
-                        v-for="group in groups"
-                        :key="group.title"
-                        :title="group.title"
-                        :class-code="group.classCode"
-                        :due-date="group.dueDate"
-                    />
+                    <div v-for="group in groups" :key="group.title">
+                        <RouterLink
+                            :to="{
+                                path: '/Group',
+                                query: {
+                                    courseId: group.courseId,
+                                    groupId: group.id,
+                                },
+                            }"
+                            class="course-link"
+                        >
+                            <GroupCard
+                                :title="group.title"
+                                :class-code="group.classCode"
+                                :due-date="group.dueDate"
+                            />
+                        </RouterLink>
+                    </div>
                 </div>
             </div>
             <CouresForm

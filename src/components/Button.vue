@@ -35,15 +35,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-        transition:
-            background-color 0.3s ease,
-            box-shadow 0.3s ease;
         box-shadow: var(--shadow);
-    }
-
-    .button:hover {
-        background-color: var(--primary-hover);
-        box-shadow: var(--shadow-hover);
     }
 
     .button:hover {

@@ -50,13 +50,23 @@
             <div class="lessons-section">
                 <h2>Lessons</h2>
                 <div class="lessons-grid">
-                    <LessonCard
+                    <RouterLink
                         v-for="lesson in groupLessons"
                         :key="lesson.id"
-                        :title="lesson.title"
-                        :knowledge="lesson.knowledge"
-                        :to="`/?courseId=${route.query.courseId}&lessonId=${lesson.id}`"
-                    />
+                        :to="{
+                            path: '/Lesson',
+                            query: {
+                                courseId: lesson.courseId,
+                                lessonId: lesson.id,
+                            },
+                        }"
+                        class="card-link"
+                    >
+                        <LessonCard
+                            :title="lesson.title"
+                            :knowledge="lesson.knowledge"
+                        />
+                    </RouterLink>
                 </div>
             </div>
 

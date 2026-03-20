@@ -26,11 +26,13 @@
                 <h2>{{ classCode }}</h2>
             </div>
             <div class="recent-lessons">
-                <Button
+                <div
+                    class="lesson-display"
                     v-for="lesson in recentLessons"
                     :key="lesson"
-                    :msg="lesson"
-                />
+                >
+                    <p>{{ lesson }}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -122,5 +124,17 @@
         align-items: center;
         gap: 0.5rem;
         width: 100%;
+    }
+
+    .lesson-display {
+        display: grid;
+        height: 40px;
+        background-color: var(--primary-color);
+        color: white;
+        width: 100%;
+        text-align: center;
+        align-content: center;
+        font-size: 16px;
+        border-radius: 10px;
     }
 </style>
