@@ -13,6 +13,6 @@ const routes = [
 ];
 
 export const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/KyleWalker_Project1/'),
     routes,
 });
